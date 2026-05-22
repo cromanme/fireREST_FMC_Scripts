@@ -1,3 +1,16 @@
+# FMC API output — may contain sensitive data (IPs, UUIDs, serial numbers)
+*.json
+
+# macOS metadata
+.DS_Store
+
+# Virtual environment
+.venv/
+
+#Claude
+.claude/
+CLAUDE.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
