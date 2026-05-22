@@ -40,11 +40,10 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str     = "ftd_device_ha_pairs.json"
-FTD_PRI_HOSTNAME: str = "543rpvDFfpr4112-01"
-FTD_SEC_HOSTNAME: str = "543rpvDFfpr4112-02"
-SITE_ID: str         = "543"
-LOCATION: str        = "DF"
+OUTPUT_FILE: str = "ftd_device_ha_pairs.json"
+FTD_PRI_HOSTNAME: str = "FTD-01"
+FTD_SEC_HOSTNAME: str = "FTD-02"
+
 
 # Failover interface — index 7 = Ethernet1/8 (0-based list from physicalinterface.get)
 FAILOVER_INTERFACE_INDEX: int = 7
@@ -137,7 +136,7 @@ def main() -> None:
         )
         raise SystemExit(1)
 
-    ha_name = f"{SITE_ID}{LOCATION}-HA"
+    ha_name = "FTD-HA"
     payload  = build_ha_payload(pri_uuid, sec_uuid, eth8_uuid, ha_name)
 
     logger.info("Creating FTD HA pair '%s'.", ha_name)

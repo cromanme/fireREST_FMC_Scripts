@@ -1,6 +1,9 @@
 # FMC API output — may contain sensitive data (IPs, UUIDs, serial numbers)
 *.json
 
+# CSV Files — may contain sensitive data (IPs, UUIDs, serial numbers)
+*.csv
+
 # macOS metadata
 .DS_Store
 

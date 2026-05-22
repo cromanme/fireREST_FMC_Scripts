@@ -42,7 +42,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-FTD_HOSTNAME: str   = "266rpvPUEfpr4115-01"
+FTD_HOSTNAME: str   = "FTD-01"
 # Version token from the deployabledevices endpoint — update before each run.
 DEPLOY_VERSION: str = "1715277438719"
 

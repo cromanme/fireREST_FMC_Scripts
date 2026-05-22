@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 OUTPUT_FILE: str  = "deployabledevices_id_pendingchanges.json"
-FTD_HOSTNAME: str = "404rpvQROfpr1150-02"
+FTD_HOSTNAME: str = "FTD-01"
 
 
 # ---------------------------------------------------------------------------

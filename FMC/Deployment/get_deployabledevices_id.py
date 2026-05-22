@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 OUTPUT_FILE: str   = "deployabledevices_id.json"
-FTD_HOSTNAME: str  = "266rpvPUEfpr4115-02"
+FTD_HOSTNAME: str  = "FTD-01"
 
 
 # ---------------------------------------------------------------------------
