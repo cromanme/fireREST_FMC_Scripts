@@ -219,15 +219,17 @@ def collect_clusters(fmc) -> tuple[str, list[dict]]:
 # Output
 # ---------------------------------------------------------------------------
 
-def _build_report(sections: list[str], fmc_ip: str) -> str:
+def _build_report(sections: list[str], fmc_ip: str, fmc_uuid: str = "", fmc_version: str = "") -> str:
     """Wrap all table sections in a report header/footer."""
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     border = "=" * 72
     header = "\n".join([
         border,
         "  Cisco FMC Resource Inventory",
-        f"  FMC Host : {fmc_ip}",
-        f"  Generated: {ts}",
+        f"  FMC Host   : {fmc_ip}",
+        f"  FMC UUID   : {fmc_uuid}",
+        f"  FMC Version: {fmc_version}",
+        f"  Generated  : {ts}",
         border,
         "",
     ])
@@ -267,7 +269,7 @@ def main() -> None:
         sections.append(table)
 
     # 4. Build & print report
-    report = _build_report(sections, fmc_ip)
+    report = _build_report(sections, fmc_ip, fmc.domain["id"], str(fmc.version))
     print("\n" + report)
 
     # 5. Save to file

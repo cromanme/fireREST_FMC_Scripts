@@ -4,6 +4,9 @@
 # CSV Files — may contain sensitive data (IPs, UUIDs, serial numbers)
 *.csv
 
+# Logs*.log
+*.log
+
 # macOS metadata
 .DS_Store
 
