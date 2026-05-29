@@ -51,9 +51,33 @@ BULK_CHUNK_SIZE: int = 1000  # max routes per bulk API request
 # Helpers
 # ---------------------------------------------------------------------------
 
+def _normalize_network_ref(obj: Dict) -> Dict:
+    """Strip GET-response-only fields from a network object reference."""
+    return {"type": obj["type"], "id": obj["id"], "name": obj.get("name", "")}
+
+
+def _normalize_gateway(gateway: Dict) -> Dict:
+    """
+    Normalize a gateway dict from a GET response into a creation payload.
+
+    A gateway is either an object reference {"object": {...}} or a literal
+    IP address {"literal": {"type": ..., "value": ...}}.
+    """
+    if "object" in gateway:
+        return {"object": _normalize_network_ref(gateway["object"])}
+    if "literal" in gateway:
+        lit = gateway["literal"]
+        return {"literal": {"type": lit["type"], "value": lit["value"]}}
+    return gateway
+
+
 def ipv4_static_route_payload(route: Dict) -> Dict:
     """
     Build a minimal creation payload from a source route dict.
+
+    Strips extra GET-response fields (links, metadata, version, etc.) from
+    selectedNetworks and gateway so the POST body contains only what the
+    FMC creation API requires.
 
     Args:
         route (Dict): Route definition as returned by the FMC API.
@@ -63,8 +87,8 @@ def ipv4_static_route_payload(route: Dict) -> Dict:
     """
     return {
         "interfaceName":    route["interfaceName"],
-        "selectedNetworks": route["selectedNetworks"],
-        "gateway":          route["gateway"],
+        "selectedNetworks": [_normalize_network_ref(n) for n in route["selectedNetworks"]],
+        "gateway":          _normalize_gateway(route["gateway"]),
         "metricValue":      route.get("metricValue", 1),
         "type":             "IPv4StaticRoute",
         "isTunneled":       route.get("isTunneled", False),
