@@ -44,6 +44,7 @@ logger = logging.getLogger(__name__)
 
 SRC_FTD_UUID: str = "0f2e6c72-405f-11ed-8def-ebb33cfc5f25"
 DST_FTD_UUID: str = "cc609250-3d1b-11f0-ad79-eb463c9df8f2"
+BULK_CHUNK_SIZE: int = 1000  # max routes per bulk API request
 
 
 # ---------------------------------------------------------------------------
@@ -125,7 +126,8 @@ def get_host_object(fmc, object_name: str) -> Optional[Dict]:
 
 def main() -> None:
     """
-    Read IPv4 static routes from the source FTD and create them on the target FTD.
+    Read IPv4 static routes from the source FTD and recreate them on the target FTD
+    using a single bulk POST request (or multiple chunked requests for large tables).
     """
     credentials = utils.prompt_fmc_credentials()
     fmc = utils.fmc_connect(*credentials)
@@ -144,22 +146,37 @@ def main() -> None:
         fmc.conn.session.close()
         return
 
+    payloads = [ipv4_static_route_payload(r) for r in routes]
+    logger.info("Prepared %d route payload(s) for bulk creation.", len(payloads))
+
     created: int = 0
     failed:  int = 0
 
-    for route in routes:
-        payload = ipv4_static_route_payload(route)
-        logger.info("Creating route: %s", payload)
+    for i in range(0, len(payloads), BULK_CHUNK_SIZE):
+        chunk = payloads[i : i + BULK_CHUNK_SIZE]
+        logger.info(
+            "Bulk creating routes %d–%d of %d ...",
+            i + 1, i + len(chunk), len(payloads),
+        )
         try:
-            fmc.device.devicerecord.routing.ipv4staticroute.create(
-                data=payload,
+            # Passing a list triggers ?bulk=true automatically in fireREST
+            response = fmc.device.devicerecord.routing.ipv4staticroute.create(
+                data=chunk,
                 container_uuid=DST_FTD_UUID,
             )
-            logger.info("Created IPv4 static route successfully.")
-            created += 1
+            if response.status_code in (200, 201):
+                created += len(chunk)
+                logger.info("Bulk created %d route(s) successfully.", len(chunk))
+            else:
+                failed += len(chunk)
+                logger.error(
+                    "Bulk create failed (HTTP %d): %s",
+                    response.status_code,
+                    response.text[:500],
+                )
         except Exception:
-            logger.exception("Failed to create route: %s", payload)
-            failed += 1
+            failed += len(chunk)
+            logger.exception("Bulk create request failed for chunk of %d routes.", len(chunk))
 
     logger.info("Done. Created: %d | Failed: %d.", created, failed)
 
