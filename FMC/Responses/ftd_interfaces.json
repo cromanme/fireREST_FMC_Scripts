@@ -1,0 +1,641 @@
+[
+    {
+        "metadata": {
+            "timestamp": 1778037781999,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332512"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332512",
+        "enabled": false,
+        "name": "Ethernet1/1",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778202263401,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332513"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "channelGroupId": 3,
+        "lacpMode": "ACTIVE",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332513",
+        "enabled": false,
+        "name": "Ethernet1/2",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {},
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778202263401,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332514"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "channelGroupId": 3,
+        "lacpMode": "ACTIVE",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332514",
+        "enabled": false,
+        "name": "Ethernet1/3",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {},
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778037781085,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332515"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332515",
+        "enabled": false,
+        "name": "Ethernet1/4",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778037781085,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332516"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332516",
+        "enabled": false,
+        "name": "Ethernet1/5",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778037781085,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332517"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332517",
+        "enabled": false,
+        "name": "Ethernet1/6",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "readOnly": {
+                "state": true,
+                "reason": "SYSTEM"
+            },
+            "timestamp": 1778047899380,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332518"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "channelGroupId": 1,
+        "lacpMode": "ACTIVE",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "isRedundantMember": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332518",
+        "description": "LAN/STATE Failover Interface",
+        "enabled": true,
+        "name": "Ethernet1/7",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {},
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "readOnly": {
+                "state": true,
+                "reason": "SYSTEM"
+            },
+            "timestamp": 1778047899380,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332519"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "channelGroupId": 1,
+        "lacpMode": "ACTIVE",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "isRedundantMember": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332519",
+        "description": "LAN/STATE Failover Interface",
+        "enabled": true,
+        "name": "Ethernet1/8",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {},
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778202548958,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "FORTY_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332522"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "channelGroupId": 2,
+        "lacpMode": "ACTIVE",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332522",
+        "enabled": false,
+        "name": "Ethernet2/1",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {},
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778202548958,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "FORTY_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332523"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "channelGroupId": 2,
+        "lacpMode": "ACTIVE",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332523",
+        "enabled": false,
+        "name": "Ethernet2/2",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {},
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778037781085,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "FORTY_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332524"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332524",
+        "enabled": false,
+        "name": "Ethernet2/3",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "timestamp": 1778037781085,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "FORTY_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332525"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "fecMode": "AUTO",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332525",
+        "enabled": false,
+        "name": "Ethernet2/4",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": false,
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "readOnly": {
+                "state": true,
+                "reason": "SYSTEM"
+            },
+            "timestamp": 1778037781085,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "state": "COMMITTED",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332520"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332520",
+        "enabled": true,
+        "name": "Management1/1",
+        "enableSGTPropagate": true,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": true,
+        "ifname": "management",
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    },
+    {
+        "metadata": {
+            "readOnly": {
+                "state": true,
+                "reason": "SYSTEM"
+            },
+            "timestamp": 1778037781085,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "state": "COMMITTED",
+            "info": "This interface is reserved for eventing. This should not be used in policies configuration",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/physicalinterfaces/00000000-0000-0ed3-0000-073016332521"
+        },
+        "type": "PhysicalInterface",
+        "MTU": 1500,
+        "nveOnly": false,
+        "mode": "NONE",
+        "id": "00000000-0000-0ed3-0000-073016332521",
+        "enabled": true,
+        "name": "Management1/2",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "managementOnly": true,
+        "ifname": "eventing",
+        "ipv6": {
+            "enableIPV6": false
+        },
+        "priority": 0
+    }
+]

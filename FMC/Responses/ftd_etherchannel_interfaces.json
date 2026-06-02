@@ -1,0 +1,234 @@
+[
+    {
+        "metadata": {
+            "readOnly": {
+                "state": true,
+                "reason": "SYSTEM"
+            },
+            "timestamp": 1778047899380,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED"
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/etherchannelinterfaces/00000000-0000-0ed3-0000-073016432842"
+        },
+        "type": "EtherChannelInterface",
+        "selectedInterfaces": [
+            {
+                "id": "00000000-0000-0ed3-0000-073016332518",
+                "name": "Ethernet1/7",
+                "type": "PhysicalInterface"
+            },
+            {
+                "id": "00000000-0000-0ed3-0000-073016332519",
+                "name": "Ethernet1/8",
+                "type": "PhysicalInterface"
+            }
+        ],
+        "lacpMode": "ACTIVE",
+        "lacpRate": "DEFAULT",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "etherChannelId": 1,
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": false
+        },
+        "managementOnly": false,
+        "MTU": 1500,
+        "ipv6": {},
+        "enabled": true,
+        "priority": 0,
+        "name": "Port-channel1",
+        "description": "LAN/STATE Failover Interface",
+        "id": "00000000-0000-0ed3-0000-073016432842"
+    },
+    {
+        "metadata": {
+            "timestamp": 1778202548958,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "FORTY_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/etherchannelinterfaces/00000000-0000-0ed3-0000-073016515273"
+        },
+        "type": "EtherChannelInterface",
+        "selectedInterfaces": [
+            {
+                "id": "00000000-0000-0ed3-0000-073016332522",
+                "name": "Ethernet2/1",
+                "type": "PhysicalInterface"
+            },
+            {
+                "id": "00000000-0000-0ed3-0000-073016332523",
+                "name": "Ethernet2/2",
+                "type": "PhysicalInterface"
+            }
+        ],
+        "lacpMode": "ACTIVE",
+        "lacpRate": "DEFAULT",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "etherChannelId": 2,
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "enableAntiSpoofing": false,
+        "fragmentReassembly": false,
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": false
+        },
+        "managementOnly": false,
+        "MTU": 1500,
+        "ifname": "DATA",
+        "ipv4": {
+            "static": {}
+        },
+        "ipv6": {
+            "enableRA": true,
+            "DHCP": {
+                "obtainIPV6DefaultRouteDHCP": false,
+                "enableDHCPClient": false
+            },
+            "enableIPV6": false,
+            "enforceEUI64": false,
+            "enableAutoConfig": false,
+            "enableDHCPAddrConfig": false,
+            "enableDHCPNonAddrConfig": false,
+            "dadAttempts": 1,
+            "nsInterval": 1000,
+            "reachableTime": 0,
+            "raLifeTime": 1800,
+            "raInterval": 200,
+            "enableDADLoopback": true
+        },
+        "enabled": false,
+        "priority": 0,
+        "name": "Port-channel2",
+        "id": "00000000-0000-0ed3-0000-073016515273"
+    },
+    {
+        "metadata": {
+            "timestamp": 1778202263401,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "supportedSpeed": "TEN_THOUSAND,THOUSAND,TWENTY_FIVE_THOUSAND,AUTO,DETECT_SFP",
+            "state": "COMMITTED",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/etherchannelinterfaces/00000000-0000-0ed3-0000-073016515153"
+        },
+        "type": "EtherChannelInterface",
+        "selectedInterfaces": [
+            {
+                "id": "00000000-0000-0ed3-0000-073016332513",
+                "name": "Ethernet1/2",
+                "type": "PhysicalInterface"
+            },
+            {
+                "id": "00000000-0000-0ed3-0000-073016332514",
+                "name": "Ethernet1/3",
+                "type": "PhysicalInterface"
+            }
+        ],
+        "lacpMode": "ACTIVE",
+        "lacpRate": "DEFAULT",
+        "hardware": {
+            "speed": "DETECT_SFP",
+            "duplex": "FULL",
+            "autoNegState": true,
+            "flowControlSend": "OFF"
+        },
+        "etherChannelId": 3,
+        "LLDP": {
+            "transmit": false,
+            "receive": false
+        },
+        "nveOnly": false,
+        "mode": "NONE",
+        "enableAntiSpoofing": false,
+        "fragmentReassembly": false,
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": false
+        },
+        "managementOnly": false,
+        "MTU": 1500,
+        "ifname": "DATA-TELEFONIA",
+        "ipv4": {
+            "static": {}
+        },
+        "ipv6": {
+            "enableRA": true,
+            "DHCP": {
+                "obtainIPV6DefaultRouteDHCP": false,
+                "enableDHCPClient": false
+            },
+            "enableIPV6": false,
+            "enforceEUI64": false,
+            "enableAutoConfig": false,
+            "enableDHCPAddrConfig": false,
+            "enableDHCPNonAddrConfig": false,
+            "dadAttempts": 1,
+            "nsInterval": 1000,
+            "reachableTime": 0,
+            "raLifeTime": 1800,
+            "raInterval": 200,
+            "enableDADLoopback": true
+        },
+        "enabled": false,
+        "priority": 0,
+        "name": "Port-channel3",
+        "id": "00000000-0000-0ed3-0000-073016515153"
+    }
+]

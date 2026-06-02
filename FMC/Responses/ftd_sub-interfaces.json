@@ -1,0 +1,270 @@
+[
+    {
+        "metadata": {
+            "timestamp": 1778169737388,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "state": "COMMITTED",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/subinterfaces/00000000-0000-0ed3-0000-073016517942"
+        },
+        "type": "SubInterface",
+        "vlanId": 10,
+        "subIntfId": 10,
+        "enableAntiSpoofing": true,
+        "fragmentReassembly": false,
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "securityZone": {
+            "id": "65ab6c2e-08dc-11f0-976b-bcea57385ed9",
+            "type": "SecurityZone"
+        },
+        "managementOnly": false,
+        "MTU": 1500,
+        "ifname": "ACI_Prod",
+        "ipv4": {
+            "static": {
+                "address": "192.168.10.12",
+                "netmask": "29"
+            }
+        },
+        "ipv6": {
+            "enableRA": true,
+            "DHCP": {
+                "obtainIPV6DefaultRouteDHCP": false,
+                "enableDHCPClient": false
+            },
+            "enableIPV6": false,
+            "enforceEUI64": false,
+            "enableAutoConfig": false,
+            "enableDHCPAddrConfig": false,
+            "enableDHCPNonAddrConfig": false,
+            "dadAttempts": 1,
+            "nsInterval": 1000,
+            "reachableTime": 0,
+            "raLifeTime": 1800,
+            "raInterval": 200,
+            "enableDADLoopback": true
+        },
+        "mode": "NONE",
+        "enabled": true,
+        "priority": 0,
+        "name": "Port-channel2",
+        "id": "00000000-0000-0ed3-0000-073016517942"
+    },
+    {
+        "metadata": {
+            "timestamp": 1778169906290,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "state": "COMMITTED",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/subinterfaces/00000000-0000-0ed3-0000-073016518073"
+        },
+        "type": "SubInterface",
+        "vlanId": 20,
+        "subIntfId": 20,
+        "enableAntiSpoofing": true,
+        "fragmentReassembly": false,
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "securityZone": {
+            "id": "969393e8-08dc-11f0-8f7c-df3b9489c3ef",
+            "type": "SecurityZone"
+        },
+        "managementOnly": false,
+        "MTU": 1500,
+        "ifname": "F5-PROD",
+        "ipv4": {
+            "static": {
+                "address": "192.168.20.180",
+                "netmask": "28"
+            }
+        },
+        "ipv6": {
+            "enableRA": true,
+            "DHCP": {
+                "obtainIPV6DefaultRouteDHCP": false,
+                "enableDHCPClient": false
+            },
+            "enableIPV6": false,
+            "enforceEUI64": false,
+            "enableAutoConfig": false,
+            "enableDHCPAddrConfig": false,
+            "enableDHCPNonAddrConfig": false,
+            "dadAttempts": 1,
+            "nsInterval": 1000,
+            "reachableTime": 0,
+            "raLifeTime": 1800,
+            "raInterval": 200,
+            "enableDADLoopback": true
+        },
+        "mode": "NONE",
+        "enabled": true,
+        "priority": 0,
+        "name": "Port-channel2",
+        "id": "00000000-0000-0ed3-0000-073016518073"
+    },
+    {
+        "metadata": {
+            "timestamp": 1778170004120,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "state": "COMMITTED",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/subinterfaces/00000000-0000-0ed3-0000-073016518122"
+        },
+        "type": "SubInterface",
+        "vlanId": 30,
+        "subIntfId": 30,
+        "enableAntiSpoofing": true,
+        "fragmentReassembly": false,
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "securityZone": {
+            "id": "3a3f3eee-08dc-11f0-8f7c-df3b9489c3ef",
+            "type": "SecurityZone"
+        },
+        "managementOnly": false,
+        "MTU": 1500,
+        "ifname": "ACI_Prod_2",
+        "ipv4": {
+            "static": {
+                "address": "192.168.30.100",
+                "netmask": "29"
+            }
+        },
+        "ipv6": {
+            "enableRA": true,
+            "DHCP": {
+                "obtainIPV6DefaultRouteDHCP": false,
+                "enableDHCPClient": false
+            },
+            "enableIPV6": false,
+            "enforceEUI64": false,
+            "enableAutoConfig": false,
+            "enableDHCPAddrConfig": false,
+            "enableDHCPNonAddrConfig": false,
+            "dadAttempts": 1,
+            "nsInterval": 1000,
+            "reachableTime": 0,
+            "raLifeTime": 1800,
+            "raInterval": 200,
+            "enableDADLoopback": true
+        },
+        "mode": "NONE",
+        "enabled": true,
+        "priority": 0,
+        "name": "Port-channel2",
+        "id": "00000000-0000-0ed3-0000-073016518122"
+    },
+    {
+        "metadata": {
+            "timestamp": 1778170115780,
+            "domain": {
+                "name": "Global",
+                "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+                "type": "Domain"
+            },
+            "state": "COMMITTED",
+            "virtualRouter": {
+                "name": "Global",
+                "id": "42e95fbf-fd5a-42bf-a95f-bffd5a42bfd6",
+                "type": "VirtualRouter"
+            }
+        },
+        "links": {
+            "self": "https://localhost:10443/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a/subinterfaces/00000000-0000-0ed3-0000-073016518173"
+        },
+        "type": "SubInterface",
+        "vlanId": 40,
+        "subIntfId": 40,
+        "enableAntiSpoofing": true,
+        "fragmentReassembly": false,
+        "enableSGTPropagate": false,
+        "pathMonitoring": {
+            "enable": false
+        },
+        "applicationMonitoring": {
+            "enable": true
+        },
+        "securityZone": {
+            "id": "5127c022-08dc-11f0-976b-bcea57385ed9",
+            "type": "SecurityZone"
+        },
+        "managementOnly": false,
+        "MTU": 1500,
+        "ifname": "ACI-PROD",
+        "ipv4": {
+            "static": {
+                "address": "192.168.40.4",
+                "netmask": "28"
+            }
+        },
+        "ipv6": {
+            "enableRA": true,
+            "DHCP": {
+                "obtainIPV6DefaultRouteDHCP": false,
+                "enableDHCPClient": false
+            },
+            "enableIPV6": false,
+            "enforceEUI64": false,
+            "enableAutoConfig": false,
+            "enableDHCPAddrConfig": false,
+            "enableDHCPNonAddrConfig": false,
+            "dadAttempts": 1,
+            "nsInterval": 1000,
+            "reachableTime": 0,
+            "raLifeTime": 1800,
+            "raInterval": 200,
+            "enableDADLoopback": true
+        },
+        "mode": "NONE",
+        "enabled": true,
+        "priority": 0,
+        "name": "Port-channel2",
+        "id": "00000000-0000-0ed3-0000-073016518173"
+    }
+]
