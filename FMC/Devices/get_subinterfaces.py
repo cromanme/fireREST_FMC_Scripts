@@ -38,8 +38,8 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "ftd_sub-interfaces.json"
-FTD_UUID: str    = "382a674a-662b-11ef-a616-e0043a222154"
+OUTPUT_FILE: str = "../Responses/ftd_sub-interfaces.json"
+FTD_UUID: str    = "9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a"
 
 
 # ---------------------------------------------------------------------------

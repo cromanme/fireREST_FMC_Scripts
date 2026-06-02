@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-get_ipv4_static_route.py
+get_physical_interfaces.py
 
-Connects to a Cisco FMC and retrieves all IPv4 static routes for a specific
+Connects to a Cisco FMC and retrieves the physical interfaces for a specific
 FTD device, saving the result to a JSON file.
 
 Usage:
@@ -38,8 +38,8 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "./Responses/ftd_ipv4_static_route.json"
-FTD_UUID: str    = "b9acf5dc-896c-11ed-a7a5-db13f6c0ea82"
+OUTPUT_FILE: str = "../Responses/ftd_etherchannel_interfaces.json"
+FTD_UUID: str    = "9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a"
 
 
 # ---------------------------------------------------------------------------
@@ -47,20 +47,20 @@ FTD_UUID: str    = "b9acf5dc-896c-11ed-a7a5-db13f6c0ea82"
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    """Retrieve IPv4 static routes from an FTD device and save to JSON."""
+    """Retrieve EtherChannel interfaces for an FTD device from FMC and save to JSON."""
     credentials = utils.prompt_fmc_credentials()
     fmc = utils.fmc_connect(*credentials)
 
     try:
-        response = fmc.device.devicerecord.routing.ipv4staticroute.get(
-            container_uuid=FTD_UUID
-        )
+        response = fmc.device.devicerecord.etherchannelinterface.get(container_uuid=FTD_UUID)
     except Exception:
-        logger.exception("Failed to retrieve IPv4 static routes for device '%s'.", FTD_UUID)
+        logger.exception(
+            "Failed to retrieve EtherChannel interfaces for device '%s'.", FTD_UUID
+        )
         raise SystemExit(1)
 
-    if not response:
-        logger.warning("No IPv4 static routes found for device '%s'.", FTD_UUID)
+    if not response:local
+        logger.warning("No EtherChannel interfaces found for device '%s'.", FTD_UUID)
         raise SystemExit(0)
 
     utils.save_json_to_file(filename=OUTPUT_FILE, data=response)
