@@ -1,0 +1,9 @@
+# Python >= 3.14 required (see pyproject.toml / .python-version)
+#
+# Install:
+#   pip install -r requirements.txt
+#
+# Or install the project itself (preferred, also installs all dependencies):
+#   pip install -e .
+
+firerest>=1.2.4
