@@ -50,7 +50,7 @@ def main() -> None:
     fmc = utils.fmc_connect(*credentials)
 
     try:
-        response = fmc.policy.ikev1ipsecproposals.get()
+        response = fmc.object.ikev1ipsecproposal.get()
     except Exception:
         logger.exception("Failed to retrieve IKEv1 IPsec proposals from FMC.")
         raise SystemExit(1)

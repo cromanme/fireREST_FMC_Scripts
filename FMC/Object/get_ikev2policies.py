@@ -50,7 +50,7 @@ def main() -> None:
     fmc = utils.fmc_connect(*credentials)
 
     try:
-        response = fmc.policy.ikev2policies.get()
+        response = fmc.object.ikev2policy.get()
     except Exception:
         logger.exception("Failed to retrieve IKEv2 policies from FMC.")
         raise SystemExit(1)
