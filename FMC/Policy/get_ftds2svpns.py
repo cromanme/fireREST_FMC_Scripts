@@ -50,7 +50,7 @@ def main() -> None:
     fmc = utils.fmc_connect(*credentials)
 
     try:
-        response = fmc.policy.ftds2svpns.get()
+        response = fmc.policy.ftds2svpn.get()
     except Exception:
         logger.exception("Failed to retrieve FTD Site to Site VPN topologies from FMC.")
         raise SystemExit(1)
