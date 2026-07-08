@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str          = "securityzone_byid.json"
+OUTPUT_FILE: str          = "../Responses/securityzone_byid.json"
 SECURITY_ZONE_UUID: str   = "5c263666-4bf6-11ed-a421-90d5b5de92a2"
 
 

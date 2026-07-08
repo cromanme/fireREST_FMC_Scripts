@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "ftd_physical_interfaces.json"
+OUTPUT_FILE: str = "../Responses/ftd_physical_interfaces.json"
 FTD_UUID: str    = "9ae3a6ec-1bc1-11f1-8a05-a2d0586ee85a"
 
 

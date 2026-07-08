@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "ftd_virtualrouter.json"
+OUTPUT_FILE: str = "../Responses/ftd_virtualrouter.json"
 FTD_UUID: str    = "6ffc03be-ab31-11ee-a3e6-c1dec40da4f6"
 
 

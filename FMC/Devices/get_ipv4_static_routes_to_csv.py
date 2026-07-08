@@ -42,7 +42,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "ftd_ipv4_static_routes.csv"
+OUTPUT_FILE: str = "../Responses/ftd_ipv4_static_routes.csv"
 FTD_UUID: str    = "16459cd4-43dd-11ed-95c6-d99a1057aa23"
 
 CSV_FIELDNAMES: List[str] = [
