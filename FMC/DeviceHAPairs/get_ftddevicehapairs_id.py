@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "ftd_device_ha_id.json"
+OUTPUT_FILE: str = "../Responses/ftd_device_ha_id.json"
 HA_UUID: str = "e2238484-0582-11ef-8562-cc0ea2e7ab0d"
 
 

@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "device_by_name.json"
+OUTPUT_FILE: str = "../Responses/device_by_name.json"
 FTD_NAME: str    = "ftd01"
 
 

@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "chassis.json"
+OUTPUT_FILE: str = "../Responses/chassis.json"
 
 
 # ---------------------------------------------------------------------------

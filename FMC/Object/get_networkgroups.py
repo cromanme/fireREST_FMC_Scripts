@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "network_groups.json"
+OUTPUT_FILE: str = "../Responses/network_groups.json"
 
 
 # ---------------------------------------------------------------------------

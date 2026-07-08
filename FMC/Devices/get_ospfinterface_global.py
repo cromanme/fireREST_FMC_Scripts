@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "ftd_ospfinterface_global.json"
+OUTPUT_FILE: str = "../Responses/sftd_ospfinterface_global.json"
 FTD_UUID: str    = "e9ef0f60-1c20-11ec-a008-deb05a5da02d"
 
 

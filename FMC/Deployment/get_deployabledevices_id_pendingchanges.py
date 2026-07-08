@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str  = "deployabledevices_id_pendingchanges.json"
+OUTPUT_FILE: str  = "../Responses/deployabledevices_id_pendingchanges.json"
 FTD_HOSTNAME: str = "FTD-01"
 
 

@@ -40,7 +40,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "ftd_ospfinterface_vrf.json"
+OUTPUT_FILE: str = "../Responses/ftd_ospfinterface_vrf.json"
 FTD_UUID: str    = "6ffc03be-ab31-11ee-a3e6-c1dec40da4f6"
 VRF_UUID: str    = "00DF1D35-F0FA-0ed3-0000-098784289156"
 
