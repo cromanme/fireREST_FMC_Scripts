@@ -11,7 +11,12 @@ Usage:
     Set FTD_UUID to the UUID of the target FTD device.
 
 Output CSV columns:
-    Route_UUID, Interface, Gateway, Selected Networks, Metric
+    VRF, Route_UUID, Interface, Gateway, Metric, Selected NetworksJSON
+
+Note:
+    "Selected Networks" is a list of object dicts in the FMC API response,
+    so it is serialized to a JSON string (Selected NetworksJSON) rather than
+    written as-is, mirroring export_objects_extendedaccesslist_to_csv.py.
 
 Dependencies:
     - utils: shared FMC connection and I/O helpers.
@@ -23,6 +28,7 @@ Author:
 
 from __future__ import annotations
 
+import json
 import logging
 from typing import Dict, List
 
@@ -46,7 +52,7 @@ OUTPUT_FILE: str = "../Responses/ftd_ipv4_static_routes.csv"
 FTD_UUID: str    = "16459cd4-43dd-11ed-95c6-d99a1057aa23"
 
 CSV_FIELDNAMES: List[str] = [
-    "VRF","Route_UUID", "Interface", "Gateway", "Selected Networks", "Metric"
+    "VRF", "Route_UUID", "Interface", "Gateway", "Metric", "Selected NetworksJSON"
 ]
 
 
@@ -66,12 +72,12 @@ def routes_to_rows(routes: List[Dict]) -> List[Dict]:
     """
     return [
         {
-            "VRF":               route.get("egressInterfaceVirtualRouter", "Global"),
-            "Route_UUID":        route.get("id", "N/A"),
-            "Interface":         route.get("interfaceName", "N/A"),
-            "Gateway":           route.get("gateway", {}).get("object", {}).get("name", "N/A"),
-            "Selected Networks": route.get("selectedNetworks", "N/A"),
-            "Metric":            route.get("metricValue", "N/A"),
+            "VRF":                   route.get("egressInterfaceVirtualRouter", "Global"),
+            "Route_UUID":            route.get("id", "N/A"),
+            "Interface":             route.get("interfaceName", "N/A"),
+            "Gateway":               route.get("gateway", {}).get("object", {}).get("name", "N/A"),
+            "Metric":                route.get("metricValue", "N/A"),
+            "Selected NetworksJSON": json.dumps(route.get("selectedNetworks", []), ensure_ascii=False),
         }
         for route in routes
     ]
