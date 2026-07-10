@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-get_ipv4_static_routes_to_csv.py
+export_ipv4_static_routes_to_csv.py
 
 Connects to a Cisco FMC and retrieves all IPv4 static routes for a specific
 FTD device, saving the result to a CSV file.
@@ -46,7 +46,7 @@ OUTPUT_FILE: str = "../Responses/ftd_ipv4_static_routes.csv"
 FTD_UUID: str    = "16459cd4-43dd-11ed-95c6-d99a1057aa23"
 
 CSV_FIELDNAMES: List[str] = [
-    "Route_UUID", "Interface", "Gateway", "Selected Networks", "Metric"
+    "VRF","Route_UUID", "Interface", "Gateway", "Selected Networks", "Metric"
 ]
 
 
@@ -66,6 +66,7 @@ def routes_to_rows(routes: List[Dict]) -> List[Dict]:
     """
     return [
         {
+            "VRF":               route.get("egressInterfaceVirtualRouter", "Global"),
             "Route_UUID":        route.get("id", "N/A"),
             "Interface":         route.get("interfaceName", "N/A"),
             "Gateway":           route.get("gateway", {}).get("object", {}).get("name", "N/A"),
