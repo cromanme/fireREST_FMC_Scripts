@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-get_interfacegroups.py
+get_protocol_port_objects.py
 
-Connects to a Cisco FMC and retrieves all Interface Group objects, saving the
+Connects to a Cisco FMC and retrieves all Protocol Port objects, saving the
 result to a JSON file.
-
-Note:
-    fireREST's Object resource exposes interface groups at
-    ``fmc.object.interfacegroup`` (added in FMC API release 6.3.0).
 
 Usage:
     Run this script directly. It will prompt for FMC credentials.
@@ -41,7 +37,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "../Responses/object_interfacegroups.json"
+OUTPUT_FILE: str = "../Responses/protocol_port_objects.json"
 
 
 # ---------------------------------------------------------------------------
@@ -49,18 +45,18 @@ OUTPUT_FILE: str = "../Responses/object_interfacegroups.json"
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    """Retrieve all Interface Group objects from FMC and save to JSON."""
+    """Retrieve all Port objects from FMC and save to JSON."""
     credentials = utils.prompt_fmc_credentials()
     fmc = utils.fmc_connect(*credentials)
 
     try:
-        response = fmc.object.interfacegroup.get()
+        response = fmc.object.protocolportobject.get()
     except Exception:
-        logger.exception("Failed to retrieve Interface Group objects from FMC.")
+        logger.exception("Failed to retrieve Protocol Port objects from FMC.")
         raise SystemExit(1)
 
     if not response:
-        logger.warning("No Interface Group objects found in FMC.")
+        logger.warning("No Protocol Port objects found in FMC.")
         raise SystemExit(0)
 
     utils.save_json_to_file(filename=OUTPUT_FILE, data=response)
