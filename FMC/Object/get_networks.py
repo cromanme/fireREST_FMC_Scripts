@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-get_objects.py
+get_networks.py
 
 Connects to a Cisco FMC and retrieves all Network objects, saving the
 result to a JSON file.
@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-OUTPUT_FILE: str = "../Responses/network_objects.json"
+OUTPUT_FILE: str = "../Responses/object_networks.json"
 
 
 # ---------------------------------------------------------------------------
