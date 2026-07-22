@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-get_ftdnatpolicies.py
+get_ftdnatpolicies_natrules.py
 
-Connects to a Cisco FMC and retrieves list of all FTD NAT Policies from FMC,
+Connects to a Cisco FMC and retrieves list of all FTD NAT rules,
 saving the result to a JSON file.
 
 Usage:
@@ -44,18 +44,18 @@ OUTPUT_FILE: str = "../Responses/ftdnatpolicies.json"
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    """Retrieve all FTD NAT Policies from FMC and save to JSON."""
+    """Retrieve all FTD Site to Site VPN topologies from FMC and save to JSON."""
     credentials = utils.prompt_fmc_credentials()
     fmc = utils.fmc_connect(*credentials)
 
     try:
         response = fmc.policy.ftdnatpolicy.get()
     except Exception:
-        logger.exception("Failed to retrieve FTD NAT Policies from FMC.")
+        logger.exception("Failed to retrieve FTD NAT Rules from FMC.")
         raise SystemExit(1)
 
     if not response:
-        logger.warning("No FTD NAT Policies found in FMC.")
+        logger.warning("No FTD NAT Rules found in FMC.")
         raise SystemExit(0)
 
     utils.save_json_to_file(filename=OUTPUT_FILE, data=response)

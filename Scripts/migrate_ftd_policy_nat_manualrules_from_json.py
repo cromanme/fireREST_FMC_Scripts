@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-migrate_ftd_policy_nat_autorules_from_csv.py
+migrate_ftd_policy_nat_manualrules_from_json.py
 
-Migrates FTD Auto NAT rules exported from one FMC into an FTD NAT policy on
+Migrates FTD Manual NAT rules exported from one FMC into an FTD NAT policy on
 a different (destination) FMC. Since UUIDs are never portable across FMC
 instances, every object referenced by a rule (Host, Network, Network Group,
-Range, FQDN, Security Zone, Interface Group, PAT pool address, ...) is
-looked up by name on the destination FMC and re-linked before the rule is
-created there.
+Range, FQDN, Security Zone, Interface Group, Protocol Port Object, PAT pool
+address, ...) is looked up by name on the destination FMC and re-linked
+before the rule is created there.
 
 Usage:
     Run this script directly. It will prompt for destination FMC credentials.
-    Set INPUT_JSON_FILE to the exported Auto NAT rules JSON (as produced by
-    FMC/Policy/get_ftdnatpolicies_autonatrules.py) and DST_NAT_POLICY_UUID to
+    Set INPUT_JSON_FILE to the exported Manual NAT rules JSON (as produced by
+    FMC/Policy/get_ftdnatpolicies_manualnatrules.py) and DST_NAT_POLICY_UUID to
     the target FTD NAT policy UUID.
 
 Input JSON Format:
-    A JSON array of FTDAutoNatRule objects (or a paged GET response with an
+    A JSON array of FTDManualNatRule objects (or a paged GET response with an
     'items' array), as returned by:
-    GET /api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies/{containerUUID}/autonatrules
+    GET /api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies/{containerUUID}/manualnatrules
 
 Dependencies:
     - utils: shared FMC connection and I/O helpers.
@@ -53,8 +53,8 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 
-INPUT_JSON_FILE: str      = "ftdnatpolicies_autonatrule.json"          # exported Auto NAT rules
-DST_NAT_POLICY_UUID: str  = "005056A4-7A08-0ed3-0000-021474840082"     # target FTD NAT policy UUID
+INPUT_JSON_FILE: str      = "/Users/cmendezm/Documents/GitHub/fireREST_FMC_Scripts/FMC/Responses/ftdnatpolicies_manualnatrule.json"        # exported Manual NAT rules
+DST_NAT_POLICY_UUID: str  = "005056A4-7A08-0ed3-0000-017179871078"     # target FTD NAT policy UUID
 
 # Maps the object 'type' as recorded in the exported rule to the matching
 # fireREST client attribute under fmc.object.
@@ -66,22 +66,38 @@ OBJECT_TYPE_TO_CLIENT_ATTR: Dict[str, str] = {
     "fqdn": "fqdn",
     "securityzone": "securityzone",
     "interfacegroup": "interfacegroup",
+    "protocolportobject": "protocolportobject",
 }
 
-# Top-level FTDAutoNatRule scalar fields that can be copied through as-is.
+# Top-level FTDManualNatRule scalar fields that can be copied through as-is.
 SCALAR_FIELDS: Tuple[str, ...] = (
     "natType",
-    "serviceProtocol",
-    "originalPort",
-    "translatedPort",
+    "enabled",
+    "unidirectional",
     "dns",
     "interfaceIpv6",
     "noProxyArp",
     "netToNet",
     "fallThrough",
     "routeLookup",
-    "interfaceInTranslatedNetwork",
+    "interfaceInOriginalDestination",
+    "interfaceInTranslatedSource",
     "description",
+)
+
+# Network/interface object reference fields, mapped to whether they are
+# required for every Manual NAT rule.
+OBJECT_REFERENCE_FIELDS: Tuple[Tuple[str, bool], ...] = (
+    ("originalSource", True),
+    ("originalDestination", False),
+    ("translatedSource", False),
+    ("translatedDestination", False),
+    ("originalSourcePort", False),
+    ("originalDestinationPort", False),
+    ("translatedSourcePort", False),
+    ("translatedDestinationPort", False),
+    ("sourceInterface", False),
+    ("destinationInterface", False),
 )
 
 # patOptions scalar fields that can be copied through as-is.
@@ -99,9 +115,9 @@ PAT_OPTION_SCALAR_FIELDS: Tuple[str, ...] = (
 # I/O helpers
 # ---------------------------------------------------------------------------
 
-def load_autonatrules_from_json(filepath: str) -> List[Dict[str, Any]]:
+def load_manualnatrules_from_json(filepath: str) -> List[Dict[str, Any]]:
     """
-    Load exported Auto NAT rules from a JSON file.
+    Load exported Manual NAT rules from a JSON file.
 
     Accepts either a plain JSON array of rules or a paged FMC GET response
     of the form {"items": [...], "paging": {...}}.
@@ -110,7 +126,7 @@ def load_autonatrules_from_json(filepath: str) -> List[Dict[str, Any]]:
         filepath (str): Path to the exported JSON file.
 
     Returns:
-        List[Dict[str, Any]]: Auto NAT rule definitions.
+        List[Dict[str, Any]]: Manual NAT rule definitions.
 
     Raises:
         SystemExit: If the file is missing, unreadable, or not valid JSON.
@@ -129,10 +145,10 @@ def load_autonatrules_from_json(filepath: str) -> List[Dict[str, Any]]:
         data = data["items"]
 
     if not isinstance(data, list):
-        logger.error("Unexpected JSON structure in '%s': expected a list of Auto NAT rules.", filepath)
+        logger.error("Unexpected JSON structure in '%s': expected a list of Manual NAT rules.", filepath)
         raise SystemExit(1)
 
-    logger.info("Loaded %d Auto NAT Rule(s) from '%s'.", len(data), filepath)
+    logger.info("Loaded %d Manual NAT Rule(s) from '%s'.", len(data), filepath)
     return data
 
 
@@ -146,11 +162,29 @@ def describe_rule(rule: Dict[str, Any], index: int) -> str:
     if name:
         return f"Rule #{index} ('{name}')"
 
-    original_name = (rule.get("originalNetwork") or {}).get("name", "?")
-    translated_name = (rule.get("translatedNetwork") or {}).get("name")
+    original_name = (rule.get("originalSource") or {}).get("name", "?")
+    translated_name = (rule.get("translatedSource") or {}).get("name")
     if translated_name:
         return f"Rule #{index} ({original_name} -> {translated_name})"
-    return f"Rule #{index} ({original_name} -> <interface>)"
+    return f"Rule #{index} ({original_name})"
+
+
+def determine_section(rule: Dict[str, Any]) -> Optional[str]:
+    """
+    Determine the NAT rule section ('before_auto' or 'after_auto') a Manual
+    NAT rule belongs to, based on the exported rule's metadata.
+
+    Returns:
+        Optional[str]: Lowercase section name accepted by create(), or None
+        if it cannot be determined (FMC will apply its default section).
+    """
+    section = (rule.get("metadata") or {}).get("section") or rule.get("section")
+    if not section:
+        return None
+    section = section.strip().lower()
+    if section in ("before_auto", "after_auto"):
+        return section
+    return None
 
 
 def _object_client_for_type(fmc: Any, obj_type: Optional[str]) -> Optional[Any]:
@@ -228,14 +262,14 @@ def resolve_object(
 # Payload transformation
 # ---------------------------------------------------------------------------
 
-def build_autonatrule_payload(
+def build_manualnatrule_payload(
     fmc_dst: Any,
     rule: Dict[str, Any],
     rule_desc: str,
     missing: List[Tuple[str, str]],
 ) -> Optional[Dict[str, Any]]:
     """
-    Build a creation payload for a single Auto NAT rule, remapping every
+    Build a creation payload for a single Manual NAT rule, remapping every
     referenced object to its destination-FMC UUID.
 
     Args:
@@ -247,7 +281,7 @@ def build_autonatrule_payload(
     Returns:
         Optional[Dict[str, Any]]: Payload ready for create(), or None if a required object is missing.
     """
-    payload: Dict[str, Any] = {"type": "FTDAutoNatRule"}
+    payload: Dict[str, Any] = {"type": "FTDManualNatRule"}
     for field in SCALAR_FIELDS:
         if field in rule:
             payload[field] = rule[field]
@@ -258,33 +292,19 @@ def build_autonatrule_payload(
 
     ok = True
 
-    original_ref = rule.get("originalNetwork")
-    if not original_ref:
-        logger.error("[%s] Missing required field 'originalNetwork' in source rule.", rule_desc)
-        ok = False
-    else:
-        resolved = resolve_object(fmc_dst, original_ref, "originalNetwork", rule_desc, missing)
-        if resolved is None:
-            ok = False
-        else:
-            payload["originalNetwork"] = resolved
-
-    translated_ref = rule.get("translatedNetwork")
-    if translated_ref:
-        resolved = resolve_object(fmc_dst, translated_ref, "translatedNetwork", rule_desc, missing)
-        if resolved is None:
-            ok = False
-        else:
-            payload["translatedNetwork"] = resolved
-
-    for field in ("sourceInterface", "destinationInterface"):
+    for field, required in OBJECT_REFERENCE_FIELDS:
         ref = rule.get(field)
-        if ref:
-            resolved = resolve_object(fmc_dst, ref, field, rule_desc, missing)
-            if resolved is None:
+        if not ref:
+            if required:
+                logger.error("[%s] Missing required field '%s' in source rule.", rule_desc, field)
                 ok = False
-            else:
-                payload[field] = resolved
+            continue
+
+        resolved = resolve_object(fmc_dst, ref, field, rule_desc, missing)
+        if resolved is None:
+            ok = False
+        else:
+            payload[field] = resolved
 
     pat_options = rule.get("patOptions")
     if pat_options:
@@ -315,18 +335,19 @@ def build_autonatrule_payload(
 def main() -> None:
     """
     1. Connect to the destination FMC.
-    2. Load exported Auto NAT rules from the input JSON file.
+    2. Load exported Manual NAT rules from the input JSON file.
     3. For each rule, resolve every referenced object on the destination FMC
-       and create the equivalent rule in the target NAT policy.
+       and create the equivalent rule in the target NAT policy's original
+       section (before_auto/after_auto).
     4. Print a migration summary.
     """
     logger.info("Enter credentials for the destination FMC.")
     credentials = utils.prompt_fmc_credentials()
     fmc_dst = utils.fmc_connect(*credentials)
 
-    rules = load_autonatrules_from_json(INPUT_JSON_FILE)
+    rules = load_manualnatrules_from_json(INPUT_JSON_FILE)
     if not rules:
-        logger.warning("No Auto NAT Rules found in '%s'. Nothing to do.", INPUT_JSON_FILE)
+        logger.warning("No Manual NAT Rules found in '%s'. Nothing to do.", INPUT_JSON_FILE)
         fmc_dst.conn.session.close()
         return
 
@@ -340,7 +361,7 @@ def main() -> None:
         logger.info("Processing %s (%d of %d).", rule_desc, index, total)
 
         rule_missing: List[Tuple[str, str]] = []
-        payload = build_autonatrule_payload(fmc_dst, rule, rule_desc, rule_missing)
+        payload = build_manualnatrule_payload(fmc_dst, rule, rule_desc, rule_missing)
 
         if payload is None:
             failed += 1
@@ -348,20 +369,21 @@ def main() -> None:
             logger.error("[%s] Skipped: one or more referenced objects could not be resolved.", rule_desc)
             continue
 
+        section = determine_section(rule)
         try:
-            response = fmc_dst.policy.ftdnatpolicy.autonatrule.create(
-                data=payload, container_uuid=DST_NAT_POLICY_UUID
+            response = fmc_dst.policy.ftdnatpolicy.manualnatrule.create(
+                data=payload, container_uuid=DST_NAT_POLICY_UUID, section=section
             )
             status = getattr(response, "status_code", None)
             if status == 201:
-                logger.info("[%s] Successfully created on destination FMC.", rule_desc)
+                logger.info("[%s] Successfully created on destination FMC (section=%s).", rule_desc, section or "default")
                 migrated += 1
             else:
                 text = getattr(response, "text", "")
-                logger.error("[%s] Failed to create Auto NAT Rule (HTTP %s): %s", rule_desc, status, text[:500])
+                logger.error("[%s] Failed to create Manual NAT Rule (HTTP %s): %s", rule_desc, status, text[:500])
                 failed += 1
         except Exception:
-            logger.exception("[%s] Error creating Auto NAT Rule on destination FMC.", rule_desc)
+            logger.exception("[%s] Error creating Manual NAT Rule on destination FMC.", rule_desc)
             failed += 1
 
     logger.info("=" * 60)

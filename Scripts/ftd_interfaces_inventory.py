@@ -56,7 +56,7 @@ logger = logging.getLogger(__name__)
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 
-FTD_UUID: str = "REPLACE_WITH_FTD_UUID"
+FTD_UUID: str = "756040da-4b12-11f1-86c8-9612df00d0df"
 
 
 # ---------------------------------------------------------------------------
