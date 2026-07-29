@@ -128,6 +128,16 @@ def _name_uuid_table(raw: list[dict], title: str) -> str:
     return _ascii_table(headers, rows, title=title)
 
 
+def _subinterface_table(raw: list[dict], title: str) -> str:
+    """Build a Name/VLAN ID/UUID ASCII table from a list of sub-interface dicts."""
+    headers = ["#", "Name", "VLAN ID", "UUID"]
+    rows = [
+        [str(idx), item.get("name", ""), item.get("vlanId", ""), item.get("id", "")]
+        for idx, item in enumerate(raw, start=1)
+    ]
+    return _ascii_table(headers, rows, title=title)
+
+
 def collect_etherchannel_interfaces(fmc, ftd_uuid: str) -> tuple[str, list[dict]]:
     """Retrieve EtherChannel interfaces for *ftd_uuid* and return (table_text, raw_items)."""
     logger.info("Collecting EtherChannel interfaces …")
@@ -167,7 +177,7 @@ def collect_subinterfaces(fmc, ftd_uuid: str) -> tuple[str, list[dict]]:
         logger.exception("Failed to retrieve sub-interfaces.")
         raw = []
     logger.info("Found %d sub-interface(s).", len(raw))
-    return _name_uuid_table(raw, title="Sub-Interfaces"), raw
+    return _subinterface_table(raw, title="Sub-Interfaces"), raw
 
 
 # ---------------------------------------------------------------------------
