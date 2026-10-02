@@ -129,24 +129,26 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def select_run_files(timestamp: Optional[str]) -> Dict[str, Path]:
+def select_run_files(timestamp: Optional[str]) -> Dict[str, Optional[Path]]:
     """
     Resolve the JSON export file to use for each object type.
 
+    export_objects_inventory.py does not always produce every file -- a
+    category with zero objects on the source FMC (e.g. no Interface Groups)
+    simply has no export file. A missing file is therefore expected, not an
+    error: it is logged here and the category is skipped later in main().
+
     Args:
-        timestamp (Optional[str]): If given, every type must have a file matching
-            '{stem}_{timestamp}.json' (a single coherent export run). If None, the
-            most recently modified '{stem}_*.json' file is selected independently
-            for each type.
+        timestamp (Optional[str]): If given, each type's file must match
+            '{stem}_{timestamp}.json' (a single coherent export run). If None,
+            the most recently modified '{stem}_*.json' file is selected
+            independently for each type.
 
     Returns:
-        Dict[str, Path]: Object type key -> resolved file path.
-
-    Raises:
-        SystemExit: If a required file cannot be found.
+        Dict[str, Optional[Path]]: Object type key -> resolved file path, or
+        None if no export file exists for that type.
     """
-    selected: Dict[str, Path] = {}
-    missing: List[str] = []
+    selected: Dict[str, Optional[Path]] = {}
 
     for key, stem in FILE_STEMS.items():
         if timestamp:
@@ -154,22 +156,28 @@ def select_run_files(timestamp: Optional[str]) -> Dict[str, Path]:
             if candidate.is_file():
                 selected[key] = candidate
             else:
-                missing.append(str(candidate))
+                logger.warning(
+                    "Export file not present for '%s' (expected '%s'); this category will not be imported.",
+                    key, candidate.name,
+                )
+                selected[key] = None
         else:
             matches = sorted(RESPONSES_DIR.glob(f"{stem}_*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
             if matches:
                 selected[key] = matches[0]
             else:
-                missing.append(f"{stem}_*.json (no files found in {RESPONSES_DIR})")
-
-    if missing:
-        logger.error("Cannot proceed: missing required export file(s):")
-        for m in missing:
-            logger.error("  - %s", m)
-        raise SystemExit(1)
+                logger.warning(
+                    "Export file not present for '%s' (no '%s_*.json' found in %s); this category will not be imported.",
+                    key, stem, RESPONSES_DIR,
+                )
+                selected[key] = None
 
     for key, path in selected.items():
-        logger.info("Using %s -> %s", key, path.name)
+        if path is not None:
+            logger.info("Using %s -> %s", key, path.name)
+
+    if not any(selected.values()):
+        logger.warning("No export files found for any category in '%s'. Nothing to import.", RESPONSES_DIR)
 
     return selected
 
@@ -186,30 +194,56 @@ def load_objects_from_json(filepath: Path, label: str) -> List[Dict[str, Any]]:
         label (str): Human-readable label for logging.
 
     Returns:
-        List[Dict[str, Any]]: Object definitions.
-
-    Raises:
-        SystemExit: If the file is missing, unreadable, or not valid JSON.
+        List[Dict[str, Any]]: Object definitions, or an empty list if the
+        file is missing, unreadable, or not valid JSON. Problems are logged,
+        not raised, so one bad export file never aborts the whole import run
+        -- that category is simply skipped.
     """
     try:
         with open(filepath, mode="r", encoding="utf-8") as f:
             data = json.load(f)
     except FileNotFoundError:
-        logger.error("JSON input file not found: '%s'.", filepath)
-        raise SystemExit(1)
+        logger.warning("Export file for '%s' not present ('%s'); this category will not be imported.", label, filepath)
+        return []
     except json.JSONDecodeError as e:
-        logger.error("Failed to parse JSON file '%s': %s", filepath, e)
-        raise SystemExit(1)
+        logger.error(
+            "Failed to parse JSON file '%s' for '%s': %s. This category will not be imported.", filepath, label, e
+        )
+        return []
 
     if isinstance(data, dict) and isinstance(data.get("items"), list):
         data = data["items"]
 
     if not isinstance(data, list):
-        logger.error("Unexpected JSON structure in '%s': expected a list of %s.", filepath, label)
-        raise SystemExit(1)
+        logger.error(
+            "Unexpected JSON structure in '%s': expected a list of %s. This category will not be imported.",
+            filepath, label,
+        )
+        return []
 
     logger.info("Loaded %d %s from '%s'.", len(data), label, filepath.name)
     return data
+
+
+def load_category_or_skip(files: Dict[str, Optional[Path]], key: str, label: str) -> List[Dict[str, Any]]:
+    """
+    Load the export file selected for *key*, or skip the category cleanly.
+
+    Args:
+        files (Dict[str, Optional[Path]]): Mapping from select_run_files(), where
+            a value of None means no export file was found for that category.
+        key (str): Object type key (matches FILE_STEMS).
+        label (str): Human-readable label for logging.
+
+    Returns:
+        List[Dict[str, Any]]: Object definitions, or an empty list if no
+        export file exists for this category.
+    """
+    filepath = files.get(key)
+    if filepath is None:
+        logger.info("Skipping '%s': no export file found for this category.", label)
+        return []
+    return load_objects_from_json(filepath, label)
 
 
 # ---------------------------------------------------------------------------
@@ -677,7 +711,9 @@ def print_summary(results: List[StageResult]) -> None:
 def main() -> None:
     """
     1. Resolve which export run's files to import (explicit timestamp or
-       most-recent-per-type).
+       most-recent-per-type). A category with no export file (e.g. nothing of
+       that type existed on the source FMC) is logged and skipped rather than
+       aborting the run.
     2. Connect to the destination FMC.
     3. Create literal objects first (Hosts, Networks, Protocol Port Objects,
        Ports-dispatch, Security Zones, Interface Groups), then composite
@@ -692,14 +728,14 @@ def main() -> None:
     fmc_dst = utils.fmc_connect(*credentials)
     cache = ObjectCache(fmc_dst)
 
-    hosts = load_objects_from_json(files["hosts"], "Hosts")
-    networks = load_objects_from_json(files["networks"], "Networks")
-    protocolportobjects = load_objects_from_json(files["protocolportobjects"], "Protocol Port Objects")
-    ports = load_objects_from_json(files["ports"], "Ports")
-    securityzones = load_objects_from_json(files["securityzones"], "Security Zones")
-    interfacegroups = load_objects_from_json(files["interfacegroups"], "Interface Groups")
-    networkgroups = load_objects_from_json(files["networkgroups"], "Network Groups")
-    portgroups = load_objects_from_json(files["portgroups"], "Port Object Groups")
+    hosts = load_category_or_skip(files, "hosts", "Hosts")
+    networks = load_category_or_skip(files, "networks", "Networks")
+    protocolportobjects = load_category_or_skip(files, "protocolportobjects", "Protocol Port Objects")
+    ports = load_category_or_skip(files, "ports", "Ports")
+    securityzones = load_category_or_skip(files, "securityzones", "Security Zones")
+    interfacegroups = load_category_or_skip(files, "interfacegroups", "Interface Groups")
+    networkgroups = load_category_or_skip(files, "networkgroups", "Network Groups")
+    portgroups = load_category_or_skip(files, "portgroups", "Port Object Groups")
 
     results: List[StageResult] = [
         process_literal_stage(cache, hosts, "host", payload_host, "Hosts"),
